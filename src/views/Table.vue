@@ -147,6 +147,10 @@
                     name !== 'mark' ||
                     [2, 3, 4, 5].includes(Number(v)) ||
                     'Оценка может быть только от 2 до 5',
+                  (v) =>
+                    name !== 'roomPhone' ||
+                    (v.toString().startsWith('380') && v.length === 12) ||
+                    'Номер телефона должен иметь формат: 380#########',
                 ]"
               ></v-text-field>
               <v-select
