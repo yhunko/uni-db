@@ -8,7 +8,7 @@ export default {
     formatData: true,
   },
   mutations: {
-    update(state: Settings, payload: Settings) {
+    update(state: Settings, payload: Settings): void {
       for (const key of Object.keys(payload)) {
         state[key] = payload[key];
       }

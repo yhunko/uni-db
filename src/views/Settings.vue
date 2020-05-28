@@ -79,7 +79,7 @@ export default Vue.extend({
   //   }
   // },
   methods: {
-    updateSettings() {
+    updateSettings(): void {
       this.$store.commit("settings/update", this.settings);
       this.$vuetify.theme.dark = this.$store.state.settings.dark;
       window.localStorage.setItem("settings", JSON.stringify(this.settings));

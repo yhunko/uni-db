@@ -69,13 +69,17 @@ import axios from "axios";
 
 import translation from "@/constants/translation";
 
+type Sequence = {
+  name: string;
+};
+
 export default Vue.extend({
   name: "App",
   data() {
     return {
       drawer: null as unknown,
       navSelected: 0,
-      sequence: [] as object[],
+      sequence: [] as Sequence[],
       tr: translation,
     };
   },
@@ -93,7 +97,7 @@ export default Vue.extend({
     }
   },
   methods: {
-    goTo(url: string) {
+    goTo(url: string): void {
       window.open(url, "_blank");
     },
   },
