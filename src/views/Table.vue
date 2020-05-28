@@ -181,6 +181,12 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+    <v-snackbar v-model="snackbar.visible" :color="snackbar.color" top right>
+      {{ snackbar.text }}
+      <!-- <v-btn dark text @click="snackbar.visible = false">
+        Закрыть
+      </v-btn> -->
+    </v-snackbar>
   </div>
 </template>
 
@@ -226,6 +232,10 @@ type FilterItem = {
   selected: undefined | string;
 };
 
+type Translation = {
+  [key: string]: string;
+};
+
 export default Vue.extend({
   name: "Table",
   data() {
@@ -250,7 +260,12 @@ export default Vue.extend({
         mode: "edit",
         title: "Редактирование",
       },
-      tr: {},
+      snackbar: {
+        visible: false,
+        color: "primary",
+        text: "",
+      },
+      tr: {} as Translation,
       search: "",
     };
   },
@@ -268,7 +283,7 @@ export default Vue.extend({
     },
   },
   watch: {
-    async $route(/* to, from */) {
+    async $route(/* to, from */): Promise<void> {
       await this.update();
     },
   },
@@ -344,7 +359,7 @@ export default Vue.extend({
       }
       return null;
     },
-    async getForeignKeySelects() {
+    async getForeignKeySelects(): Promise<void> {
       const res: ForeignKeySelect[] = [];
       for (const fk of this.foreignKeys) {
         const items: ForeignKeySelectItem[] = [];
@@ -368,12 +383,12 @@ export default Vue.extend({
       }
       this.foreignKeySelects = res;
     },
-    setData() {
+    setData(): void {
       this.filteredData = this.formattedData.length
         ? this.formattedData
         : this.data;
     },
-    async update() {
+    async update(): Promise<void> {
       try {
         this.loading = true;
         this.data = [];
@@ -394,7 +409,7 @@ export default Vue.extend({
           if (data?.length) {
             for (const key in data[0]) {
               this.headers.push({
-                text: this.tr[key as keyof {}],
+                text: this.tr[key],
                 value: key,
               });
               this.filters.push({ selected: undefined });
@@ -414,7 +429,7 @@ export default Vue.extend({
           if (info?.length) {
             this.info = infoRes.data;
             for (const { name } of this.info) {
-              this.editForm[name as keyof {}] = "";
+              this.editForm[name] = "";
             }
           }
         }
@@ -469,7 +484,7 @@ export default Vue.extend({
       }
       this.loading = false;
     },
-    async addItem() {
+    async addItem(): Promise<void> {
       this.dialog.mode = "add";
       this.dialog.title = "Добавление";
       try {
@@ -481,13 +496,13 @@ export default Vue.extend({
           this.editForm.id = nextIdRes.data.id;
           this.dialog.visible = true;
         } else {
-          window.alert(nextIdRes.status);
+          console.error(nextIdRes.status);
         }
       } catch (err) {
-        window.alert(err);
+        console.error(err);
       }
     },
-    editItem(item: TableItem) {
+    editItem(item: TableItem): void {
       this.dialog.mode = "edit";
       this.dialog.title = "Редактирование";
       const actualItem = this.data.find((x) => x.id === item.id);
@@ -500,7 +515,7 @@ export default Vue.extend({
         console.log("An error occured");
       }
     },
-    async save() {
+    async save(): Promise<void> {
       try {
         if (this.dialog.mode === "edit") {
           const updateReq = await axios.post(
@@ -526,35 +541,38 @@ export default Vue.extend({
           }
         }
       } catch (err) {
-        window.alert(err);
         console.error(err);
       }
     },
-    async deleteItem({ id }: TableItem) {
+    async deleteItem({ id }: TableItem): Promise<void> {
       try {
         const delReq = await axios.delete(`/api/delete/${this.table}/${id}`);
         if (delReq.status === 200) {
           this.update();
-          window.alert("Element deleted successfully");
+          this.snackbar.text = "Элемент успешно удалён";
+          this.snackbar.color = "success";
+          this.snackbar.visible = true;
         }
       } catch (err) {
-        window.alert("An error occurred");
+        console.error(err);
       }
     },
-    async deleteSelected() {
+    async deleteSelected(): Promise<void> {
       const res = await axios.delete(
         `/api/delete/${this.table}/${this.selected.map((item) => item.id)}`
       );
       if (res.status === 200) {
-        window.alert("Sucessfully deleted");
         this.selected = [];
         this.update();
+        this.snackbar.text = "Элементы успешно удалены";
+        this.snackbar.color = "success";
+        this.snackbar.visible = true;
       }
     },
-    closeDialog() {
+    closeDialog(): void {
       this.dialog.visible = false;
     },
-    exportCsv() {
+    exportCsv(): void {
       const SEP = ";";
       let csvContent = `data:text/csv;charset=utf-8,${this.headers
         .map((header) => {
@@ -583,7 +601,7 @@ export default Vue.extend({
       document.body.appendChild(link);
       link.click();
     },
-    getColor(mark: string) {
+    getColor(mark: string): string {
       const num = Number(mark);
       if (num === 2) {
         return "red";
@@ -593,7 +611,7 @@ export default Vue.extend({
         return "green";
       }
     },
-    filterData() {
+    filterData(): void {
       this.setData();
       if (this.filters.some((filter) => !!filter.selected)) {
         this.filters.forEach((filter, index) => {
@@ -605,7 +623,7 @@ export default Vue.extend({
         });
       }
     },
-    clearAllFilters() {
+    clearAllFilters(): void {
       for (const filter of this.filters) {
         filter.selected = undefined;
       }
