@@ -93,7 +93,7 @@ export default Vue.extend({
       const res = await axios.get("/api/list");
       this.sequence = res.data;
     } catch (err) {
-      console.log(err);
+      window.alert(err);
     }
   },
   methods: {

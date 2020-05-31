@@ -376,7 +376,7 @@ export default Vue.extend({
               }
             }
           } catch (err) {
-            console.log(err);
+            window.alert(err);
           }
         }
         res.push({ name: fk.from, items });
@@ -465,7 +465,7 @@ export default Vue.extend({
                       this.formattedData[i][from] = formatRes;
                     }
                   } catch (err) {
-                    console.log(err);
+                    window.alert(err);
                   }
                 }
               }
@@ -479,7 +479,7 @@ export default Vue.extend({
         this.setData();
         this.loading = false;
       } catch (err) {
-        console.error(err);
+        window.alert(err);
         this.loading = false;
       }
       this.loading = false;
@@ -496,10 +496,10 @@ export default Vue.extend({
           this.editForm.id = nextIdRes.data.id;
           this.dialog.visible = true;
         } else {
-          console.error(nextIdRes.status);
+          window.alert(nextIdRes.status);
         }
       } catch (err) {
-        console.error(err);
+        window.alert(err);
       }
     },
     editItem(item: TableItem): void {
@@ -512,7 +512,7 @@ export default Vue.extend({
         }
         this.dialog.visible = true;
       } else {
-        console.log("An error occured");
+        window.alert("An error occured");
       }
     },
     async save(): Promise<void> {
@@ -541,7 +541,7 @@ export default Vue.extend({
           }
         }
       } catch (err) {
-        console.error(err);
+        window.alert(err);
       }
     },
     async deleteItem({ id }: TableItem): Promise<void> {
@@ -554,7 +554,7 @@ export default Vue.extend({
           this.snackbar.visible = true;
         }
       } catch (err) {
-        console.error(err);
+        window.alert(err);
       }
     },
     async deleteSelected(): Promise<void> {
