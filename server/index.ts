@@ -10,6 +10,12 @@ import { TableInfo } from "../src/@types/TableInfo";
 const STATS_FILE_PATH = "stats.json";
 const DB_PATH = resolve(".data");
 
+type Stats = {
+  [key: string]: {
+    [key: string]: number;
+  };
+};
+
 const readStats = () => {
   let result = {};
   try {
@@ -20,7 +26,7 @@ const readStats = () => {
   return result;
 };
 
-const dumpStats = (stats: object) => {
+const dumpStats = (stats: Stats) => {
   try {
     writeFileSync(STATS_FILE_PATH, JSON.stringify(stats), { flag: "w+" });
   } catch (err) {
@@ -36,7 +42,7 @@ if (!existsSync(DB_PATH)) {
 
 const db = sqlite(join(DB_PATH, "main.db"));
 
-export default (app: Application) => {
+export default (app: Application): void => {
   app.use((req, res, next) => {
     res.on("finish", () => {
       const now = new Date();
