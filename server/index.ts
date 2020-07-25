@@ -42,6 +42,28 @@ if (!existsSync(DB_PATH)) {
 
 const db = sqlite(join(DB_PATH, "main.db"));
 
+db.prepare(
+  "CREATE TABLE IF NOT EXISTS 'certification' ('id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'date' TEXT NOT NULL, 'type' TEXT NOT NULL, 'loadId' INTEGER, FOREIGN KEY('loadId') REFERENCES 'load'('id') ON DELETE SET NULL ON UPDATE CASCADE);"
+).run();
+db.prepare(
+  "CREATE TABLE IF NOT EXISTS 'faculty' ('id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE, 'name' text NOT NULL UNIQUE, 'deanName' text NOT NULL, 'roomPhone' INTEGER NOT NULL);"
+).run();
+db.prepare(
+  "CREATE TABLE IF NOT EXISTS 'group' ('id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'name' TEXT NOT NULL, 'number' INTEGER NOT NULL, 'year' INTEGER NOT NULL, 'course' INTEGER NOT NULL, 'branch' TEXT NOT NULL);"
+).run();
+db.prepare(
+  "CREATE TABLE IF NOT EXISTS 'load' ('id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'year' INTEGER NOT NULL, 'groupId' INTEGER, 'subjectId' INTEGER, 'teacherId' INTEGER, FOREIGN KEY('groupId') REFERENCES 'group'('id') ON DELETE SET NULL ON UPDATE CASCADE, FOREIGN KEY('subjectId') REFERENCES 'subject'('id') ON DELETE SET NULL ON UPDATE CASCADE, FOREIGN KEY('teacherId') REFERENCES 'teacher'('id') ON DELETE SET NULL ON UPDATE CASCADE);"
+).run();
+db.prepare(
+  "CREATE TABLE IF NOT EXISTS 'mark' ('id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'mark' INTEGER, 'studentId' INTEGER NOT NULL, 'certificationId' INTEGER, FOREIGN KEY('certificationId') REFERENCES 'certification'('id') ON DELETE SET NULL ON UPDATE CASCADE, FOREIGN KEY('studentId') REFERENCES 'student'('id') ON DELETE CASCADE ON UPDATE CASCADE);"
+).run();
+db.prepare(
+  "CREATE TABLE IF NOT EXISTS 'student' ('id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'name' TEXT NOT NULL, 'surname' TEXT NOT NULL, 'birthYear' INTEGER NOT NULL, 'groupId' INTEGER, FOREIGN KEY('groupId') REFERENCES 'group'('id') ON DELETE CASCADE ON UPDATE CASCADE);"
+).run();
+db.prepare(
+  "CREATE TABLE IF NOT EXISTS 'teacher' ('id' INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT, 'surname' TEXT NOT NULL, 'name' TEXT NOT NULL, 'patronymic' TEXT NOT NULL, 'category' TEXT NOT NULL, 'facultyId' INTEGER, FOREIGN KEY('facultyId') REFERENCES 'faculty'('id') ON DELETE SET NULL ON UPDATE CASCADE);"
+).run();
+
 export default (app: Application): void => {
   app.use((req, res, next) => {
     res.on("finish", () => {
