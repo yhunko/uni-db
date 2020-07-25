@@ -1,0 +1,13 @@
+GET http://localhost:3000/api/get/group
+
+###
+
+GET http://localhost:3000/api/get/subject?id=1
+
+###
+
+GET http://localhost:3000/api/get/certification?id=1
+
+###
+
+GET http://localhost:3000/api/get/load
