@@ -1,9 +1,8 @@
-# uni-db
+![uni-db](https://socialify.git.ci/yegorgunko/uni-db/image?description=1&font=Inter&issues=1&language=1&owner=1&pattern=Plus&pulls=1&theme=Dark)
 
 This is a basic project that helps managing university database. It is a course project so only Russian localization for now (I doubt I will add more).
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/yegorgunko/uni-db)
-[![GitHub issues](https://img.shields.io/github/issues-raw/yegorgunko/uni-db)](https://github.com/yegorgunko/uni-db/issues)
 
 [![Preview screenshot 1](assets/images/screenshots/1.png)](assets/images/screenshots/1.png)
 [![Preview screenshot 2](assets/images/screenshots/2.png)](assets/images/screenshots/2.png)
