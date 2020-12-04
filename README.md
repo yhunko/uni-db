@@ -4,8 +4,9 @@ This is a basic project that helps managing university database. It is a course 
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/yegorgunko/uni-db)
 
-[![Preview screenshot 1](assets/images/screenshots/1.png)](assets/images/screenshots/1.png)
-[![Preview screenshot 2](assets/images/screenshots/2.png)](assets/images/screenshots/2.png)
+[![Home page](.github/assets/images/screenshots/home.png)](.github/assets/images/screenshots/home.png)
+[![Adding](.github/assets/images/screenshots/adding.png)](.github/assets/images/screenshots/adding.png)
+[![Filters](.github/assets/images/screenshots/filters.png)](.github/assets/images/screenshots/filters.png)
 
 ## Table of Contents
 
