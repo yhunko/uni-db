@@ -9,10 +9,21 @@ This is a basic project that helps managing university database. It is a course 
 
 ## Table of Contents
 
-- [Project setup](#project-setup)
 - [Features](#features)
+- [Project setup](#project-setup)
 - [Tests](#tests)
 - [License](#license)
+
+## Features
+
+- Modern UI and SPA support.
+- Easy server management right beside the website source code ([`server/index.ts`](server/index.ts) file).
+- REST API with relative paths in code.
+- Node.js + SQLite
+- Filter by any of the parameters.
+- Export data to .CSV format.
+- Dynamic pages (means if you add another table, [`Table.vue`](src/views/Table.vue) page will automatically get the data from it).
+- Easy UI cutomization thanks to [`Vuetify`](https://vuetifyjs.com/) components.
 
 ## Project setup
 
@@ -61,16 +72,6 @@ yarn lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
-
-## Features
-
-- Modern UI and SPA support.
-- Easy server management right beside the website source code ([`server/index.ts`](server/index.ts) file).
-- Filter by any of the parameters.
-- Convenient (I hope so) relational view.
-- Export data to .CSV format.
-- Dynamic pages (means if you add another table, [`Table.vue`](src/views/Table.vue) page will automatically get the data from it).
-- Easy UI cutomization thanks to [`Vuetify`](https://vuetifyjs.com/) components.
 
 ## Tests
 
