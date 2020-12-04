@@ -194,7 +194,7 @@
 import Vue from "vue";
 import axios from "axios";
 import { TableInfo } from "@/@types/TableInfo";
-import { ForeignKey } from "@/@types/ForeignKey";
+import { ForeignKey } from "@/@types/sqlite";
 
 import translation from "@/constants/translation";
 
