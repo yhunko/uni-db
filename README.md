@@ -1,19 +1,30 @@
-# uni-db
+![uni-db](https://socialify.git.ci/yegorgunko/uni-db/image?description=1&font=Inter&issues=1&language=1&owner=1&pattern=Plus&pulls=1&theme=Dark)
 
 This is a basic project that helps managing university database. It is a course project so only Russian localization for now (I doubt I will add more).
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/yegorgunko/uni-db)
-[![GitHub issues](https://img.shields.io/github/issues-raw/yegorgunko/uni-db)](https://github.com/yegorgunko/uni-db/issues)
 
-[![Preview screenshot 1](assets/images/screenshots/1.png)](assets/images/screenshots/1.png)
-[![Preview screenshot 2](assets/images/screenshots/2.png)](assets/images/screenshots/2.png)
+[![Home page](.github/assets/images/screenshots/home.png)](.github/assets/images/screenshots/home.png)
+[![Adding](.github/assets/images/screenshots/adding.png)](.github/assets/images/screenshots/adding.png)
+[![Filters](.github/assets/images/screenshots/filters.png)](.github/assets/images/screenshots/filters.png)
 
 ## Table of Contents
 
-- [Project setup](#project-setup)
 - [Features](#features)
+- [Project setup](#project-setup)
 - [Tests](#tests)
 - [License](#license)
+
+## Features
+
+- Modern UI and SPA support.
+- Easy server management right beside the website source code ([`server/index.ts`](server/index.ts) file).
+- REST API with relative paths in code.
+- Node.js + SQLite
+- Filter by any of the parameters.
+- Export data to .CSV format.
+- Dynamic pages (means if you add another table, [`Table.vue`](src/views/Table.vue) page will automatically get the data from it).
+- Easy UI cutomization thanks to [`Vuetify`](https://vuetifyjs.com/) components.
 
 ## Project setup
 
@@ -62,16 +73,6 @@ yarn lint
 ### Customize configuration
 
 See [Configuration Reference](https://cli.vuejs.org/config/).
-
-## Features
-
-- Modern UI and SPA support.
-- Easy server management right beside the website source code ([`server/index.ts`](server/index.ts) file).
-- Filter by any of the parameters.
-- Convenient (I hope so) relational view.
-- Export data to .CSV format.
-- Dynamic pages (means if you add another table, [`Table.vue`](src/views/Table.vue) page will automatically get the data from it).
-- Easy UI cutomization thanks to [`Vuetify`](https://vuetifyjs.com/) components.
 
 ## Tests
 

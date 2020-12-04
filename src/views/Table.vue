@@ -104,12 +104,12 @@
           </template>
         </v-toolbar>
       </template>
-      <template v-if="table === 'mark'" v-slot:item.mark="{ item }">
+      <template v-if="table === 'mark'" v-slot:[`item.mark`]="{ item }">
         <v-chip :color="getColor(item.mark)">
           {{ item.mark }}
         </v-chip>
       </template>
-      <template v-slot:item.action="{ item }">
+      <template v-slot:[`item.action`]="{ item }">
         <v-icon small class="mr-2" @click="editItem(item)">
           mdi-pencil
         </v-icon>
@@ -194,7 +194,7 @@
 import Vue from "vue";
 import axios from "axios";
 import { TableInfo } from "@/@types/TableInfo";
-import { ForeignKey } from "@/@types/ForeignKey";
+import { ForeignKey } from "@/@types/sqlite";
 
 import translation from "@/constants/translation";
 

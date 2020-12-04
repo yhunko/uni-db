@@ -1,3 +1,11 @@
+export type IndexList = {
+  seq: number;
+  name: string;
+  unique: 0 | 1;
+  origin: string;
+  partial: 0 | 1;
+};
+
 export type ForeignKey = {
   id: number;
   seq: number;
