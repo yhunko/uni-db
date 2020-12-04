@@ -183,9 +183,6 @@
     </v-dialog>
     <v-snackbar v-model="snackbar.visible" :color="snackbar.color" top right>
       {{ snackbar.text }}
-      <!-- <v-btn dark text @click="snackbar.visible = false">
-        Закрыть
-      </v-btn> -->
     </v-snackbar>
   </div>
 </template>
