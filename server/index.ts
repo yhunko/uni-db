@@ -5,6 +5,7 @@ import { join, resolve } from "path";
 import { readFileSync, writeFileSync } from "fs";
 import format from "date-fns/format";
 
+import { IndexList } from "../src/@types/sqlite";
 import { TableInfo } from "../src/@types/TableInfo";
 
 const STATS_FILE_PATH = "stats.json";
@@ -83,9 +84,9 @@ export default (app: Application): void => {
 
   apiRouter.get("/getUniques/:table", ({ params: { table } }, res) => {
     if (table) {
-      const indexList = db.pragma(`index_list("${table}")`);
+      const indexList: IndexList[] = db.pragma(`index_list("${table}")`);
       const indexListUnique = indexList.filter((index) => index.unique === 1);
-      const uniquesNames = [];
+      const uniquesNames: string[] = [];
       for (const { name } of indexListUnique) {
         const { name: uniqueColName } = db.pragma(`index_info(${name})`)[0];
         uniquesNames.push(uniqueColName);
